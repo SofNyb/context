@@ -14,7 +14,9 @@ const AddPost = ({ closePostModal }) => {
     if (!title || !body || !userId)
       return setError("Alle felter skal udfyldes.");
 
-    addPost({ title, body, userId });
+    const user = users.find((user) => user.userId === parseInt(userId));
+
+    addPost({ title, body, userId, name: user.name });
     closePostModal();
   };
 
