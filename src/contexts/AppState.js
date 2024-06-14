@@ -11,7 +11,7 @@ const appReducer = (state, action) => {
     case "ADD_POST": {
       return {
         ...state,
-        posts: [action.payload, ...state.posts],
+        posts: state.posts.concat(action.payload),
       };
     }
     case "ADD_USER": {

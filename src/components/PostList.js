@@ -6,6 +6,7 @@ const PostList = () => {
   // posts array er template til at se UI
   const { posts } = useContext(AppContext);
 
+  console.log(posts);
   return (
     <ul>
       {posts.map((post) => (
