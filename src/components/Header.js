@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
-import { AppContext } from "../contexts/AppState";
+import { useState } from "react";
 import AddPost from "./AddPost";
 
 const Header = () => {
-  const { darkTheme } = useContext(AppContext);
   const [openModal, setOpenModal] = useState(false);
 
   const closeModal = () => {
@@ -11,7 +9,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`${darkTheme ? "dark" : ""}`}>
+    <header>
       <h1>Bloggars</h1>
       <button onClick={() => setOpenModal(!openModal)}>Lav en post</button>
       {openModal && <AddPost closeModal={closeModal} />}

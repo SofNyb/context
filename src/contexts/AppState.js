@@ -14,12 +14,6 @@ const appReducer = (state, action) => {
         posts: [action.payload, ...state.posts],
       };
     }
-    case "SET_DARK_THEME": {
-      return {
-        ...state,
-        darkTheme: action.payload,
-      };
-    }
     default: {
       return state;
     }
@@ -49,7 +43,6 @@ const initialState = {
       body: "Ved at tilføje en ny post, vil den blive vist øverst i listen, men forsvinder ved reload af browser.",
     },
   ],
-  darkTheme: false,
 };
 
 export const AppContext = createContext(initialState);
@@ -71,21 +64,12 @@ export const AppProvider = ({ children }) => {
     });
   };
 
-  const setDarkTheme = (bool) => {
-    dispatch({
-      type: "SET_DARK_THEME",
-      payload: bool,
-    });
-  };
-
   return (
     <AppContext.Provider
       value={{
         posts: state.posts,
-        darkTheme: state.darkTheme,
         deletePost,
         addPost,
-        setDarkTheme,
       }}
     >
       {children}
