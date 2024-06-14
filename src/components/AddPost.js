@@ -11,7 +11,8 @@ const AddPost = ({ closePostModal }) => {
   const validateInputs = (e) => {
     e.preventDefault();
 
-    if (!title || !body) return setError("Alle felter skal udfyldes.");
+    if (!title || !body || !userId)
+      return setError("Alle felter skal udfyldes.");
 
     addPost({ title, body, userId });
     closePostModal();
