@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppState";
 
 const AddPost = ({ closePostModal }) => {
-  const { addPost } = useContext(AppContext);
+  const { addPost, users } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [userId, setUserId] = useState("");
@@ -41,12 +41,11 @@ const AddPost = ({ closePostModal }) => {
           <option value="" disabled>
             Vælg en bruger
           </option>
-          {/*{usersOptions}*/}
-
-          <option value="1">Emma Nielsen</option>
-          <option value="2">Alexander Madsen</option>
-          <option value="3">Lucas Pedersen</option>
-          <option value="4">Isabella Andersen</option>
+          {users.map((user) => (
+            <option key={user.userId} value={user.userId}>
+              {user.name}
+            </option>
+          ))}
         </select>
         <br />
         <br />
