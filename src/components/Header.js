@@ -1,18 +1,35 @@
 import { useState } from "react";
 import AddPost from "./AddPost";
+import AddUsers from "./AddUsers";
 
 const Header = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [usersModalOpen, setUsersModalOpen] = useState(false);
+  const [postModalOpen, setPostModalOpen] = useState(false);
 
-  const closeModal = () => {
-    setOpenModal(false);
+  const openUsersModal = () => {
+    setUsersModalOpen(true);
+  };
+
+  const closeUsersModal = () => {
+    setUsersModalOpen(false);
+  };
+
+  const openPostModal = () => {
+    setPostModalOpen(true);
+  };
+
+  const closePostModal = () => {
+    setPostModalOpen(false);
   };
 
   return (
     <header>
       <h1>Bloggars</h1>
-      <button onClick={() => setOpenModal(!openModal)}>Lav en post</button>
-      {openModal && <AddPost closeModal={closeModal} />}
+      <button onClick={openUsersModal}>Tilføj en bruger</button>
+      {usersModalOpen && <AddUsers closeUsersModal={closeUsersModal} />}
+
+      <button onClick={openPostModal}>Lav en post</button>
+      {postModalOpen && <AddPost closePostModal={closePostModal} />}
     </header>
   );
 };

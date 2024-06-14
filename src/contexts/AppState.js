@@ -14,6 +14,16 @@ const appReducer = (state, action) => {
         posts: [action.payload, ...state.posts],
       };
     }
+    case "ADD_USER": {
+      return {
+        ...state,
+        users: [
+          ...state.users,
+          { userId: action.payload.userId, name: action.payload.name },
+        ],
+        nextUserId: state.nextUserId + 1,
+      };
+    }
     default: {
       return state;
     }
@@ -26,23 +36,50 @@ const initialState = {
       id: 1,
       title: "Første post",
       body: "Dette er det første post.",
+      userId: 1,
+      name: "Emma Nielsen",
     },
     {
       id: 2,
       title: "Anden post",
       body: "Disse posts er for at vise hardcoded initial state.",
+      userId: 2,
+      name: "Alexander Madsen",
     },
     {
       id: 3,
       title: "Tredje post",
       body: "Alle fire kan slettes, men kommer igen ved reload af browser.",
+      userId: 1,
+      name: "Emma Nielsen",
     },
     {
       id: 4,
       title: "Fjerde post",
       body: "Ved at tilføje en ny post, vil den blive vist øverst i listen, men forsvinder ved reload af browser.",
+      userId: 4,
+      name: "Isabella Andersen",
     },
   ],
+  users: [
+    {
+      userId: 1,
+      name: "Emma Nielsen",
+    },
+    {
+      userId: 2,
+      name: "Alexander Madsen",
+    },
+    {
+      userId: 3,
+      name: "Lucas Pedersen",
+    },
+    {
+      userId: 4,
+      name: "Isabella Andersen",
+    },
+  ],
+  nextUserId: 5,
 };
 
 export const AppContext = createContext(initialState);
@@ -64,12 +101,22 @@ export const AppProvider = ({ children }) => {
     });
   };
 
+  const addUsers = (user) => {
+    dispatch({
+      type: "ADD_USER",
+      payload: user,
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
         posts: state.posts,
+        users: state.users,
         deletePost,
         addPost,
+        addUsers,
+        nextUserId: state.nextUserId,
       }}
     >
       {children}
